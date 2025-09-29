@@ -1,6 +1,7 @@
 package com.jadikuli.cnnproject.screen.authentication
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -44,8 +45,11 @@ import com.jadikuli.cnnproject.screen.authentication.components.CustomTextField
 import com.jadikuli.cnnproject.screen.authentication.components.DecorativeShapes
 
 @Composable
-fun RegisterScreen() {
-    var fullName by remember { mutableStateOf("jhone williams") }
+fun RegisterScreen(
+    onRegister: (String, String, String) -> Unit,
+    onNavigateToLogin: () -> Unit
+) {
+    var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
@@ -98,8 +102,8 @@ fun RegisterScreen() {
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     CustomTextField(
-                        value = fullName,
-                        onValueChange = { fullName = it },
+                        value = name,
+                        onValueChange = { name = it },
                         icon = Icons.Default.Person
                     )
 
@@ -158,7 +162,9 @@ fun RegisterScreen() {
 
                     // Sign Up Button
                     Button(
-                        onClick = { /* Handle sign up */ },
+                        onClick = {
+                            onRegister(name, email, password)
+                        },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(56.dp),
@@ -199,15 +205,18 @@ fun RegisterScreen() {
                     text = "Sign in",
                     fontSize = 14.sp,
                     color = OrangeColor,
-                    fontWeight = FontWeight.Medium
+                    fontWeight = FontWeight.Medium,
+                    modifier = Modifier.clickable {
+                        onNavigateToLogin()
+                    }
                 )
             }
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun RegisterScreenPreview() {
-    RegisterScreen()
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun RegisterScreenPreview() {
+//    RegisterScreen()
+//}

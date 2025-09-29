@@ -21,6 +21,13 @@ fun NavGraphBuilder.authNavGraph(
     }
 
     composable(Screen.Register.route) {
-        RegisterScreen()
+        RegisterScreen(
+            onRegister = { name, email, password ->
+                authViewModel.register(name, email, password)
+            },
+            onNavigateToLogin = {
+                navController.navigate("login")
+            }
+        )
     }
 }

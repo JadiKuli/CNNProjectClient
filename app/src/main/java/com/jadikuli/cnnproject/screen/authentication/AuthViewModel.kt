@@ -52,9 +52,14 @@ class AuthViewModel @Inject constructor(
 
     fun register(name: String, email: String, password: String) {
         viewModelScope.launch {
+            _toastEvent.emit("Tunggu Sebentar...")
+
             val success = repository.register(name, email, password)
             if (success) {
+                _toastEvent.emit("Registrasi berhasil")
                 login(email, password)
+            } else {
+                _toastEvent.emit("Registrasi gagal, silakan coba lagi")
             }
         }
     }
