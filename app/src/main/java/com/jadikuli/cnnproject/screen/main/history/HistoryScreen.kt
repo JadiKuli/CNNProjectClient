@@ -1,4 +1,4 @@
-package com.jadikuli.cnnproject.screen.main
+package com.jadikuli.cnnproject.screen.main.history
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -17,7 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jadikuli.cnnproject.screen.main.components.card.HistoryCard
+import com.jadikuli.cnnproject.screen.main.shared.components.card.HistoryCard
 
 @Preview(showBackground = true)
 @Composable

@@ -1,7 +1,6 @@
-package com.jadikuli.cnnproject.screen.main
+package com.jadikuli.cnnproject.screen.main.home
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -25,7 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jadikuli.cnnproject.screen.main.components.card.ArticleCard
+import com.jadikuli.cnnproject.screen.main.shared.components.card.ArticleCard
 
 @Preview(showBackground = true)
 @Composable

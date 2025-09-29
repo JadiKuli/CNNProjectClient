@@ -1,4 +1,4 @@
-package com.jadikuli.cnnproject.screen.main.components.card
+package com.jadikuli.cnnproject.screen.main.shared.components.card
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
