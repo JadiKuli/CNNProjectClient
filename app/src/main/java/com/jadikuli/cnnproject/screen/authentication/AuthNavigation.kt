@@ -5,9 +5,19 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.jadikuli.cnnproject.navigation.Screen
 
-fun NavGraphBuilder.authNavGraph(navController: NavController) {
+fun NavGraphBuilder.authNavGraph(
+    navController: NavController,
+    authViewModel: AuthViewModel
+) {
     composable(Screen.Login.route) {
-        LoginScreen()
+        LoginScreen(
+            onLogin = { email, password ->
+                authViewModel.login(email, password)
+            },
+            onNavigateToRegister = {
+                navController.navigate("register")
+            }
+        )
     }
 
     composable(Screen.Register.route) {

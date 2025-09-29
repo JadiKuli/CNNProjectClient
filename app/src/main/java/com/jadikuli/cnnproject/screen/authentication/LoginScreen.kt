@@ -41,14 +41,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jadikuli.cnnproject.screen.authentication.components.CustomTextField
@@ -60,7 +55,11 @@ val BackgroundColor = Color(0xFFF5F5F5)
 val TextGrayColor = Color(0xFF9E9E9E)
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    onLogin: (String, String) -> Unit,
+    onNavigateToRegister: () -> Unit
+
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -153,7 +152,7 @@ fun LoginScreen() {
 
                     // Login Button
                     Button(
-                        onClick = { /* Handle login */ },
+                        onClick = { onLogin(email, password) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(56.dp),
@@ -194,17 +193,18 @@ fun LoginScreen() {
                     text = "Sign up",
                     fontSize = 14.sp,
                     color = OrangeColor,
-                    fontWeight = FontWeight.Medium
+                    fontWeight = FontWeight.Medium,
+                    modifier = Modifier.clickable { onNavigateToRegister() }
                 )
             }
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun LoginScreenPreview() {
-    MaterialTheme {
-        LoginScreen()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun LoginScreenPreview() {
+//    MaterialTheme {
+//        LoginScreen()
+//    }
+//}
