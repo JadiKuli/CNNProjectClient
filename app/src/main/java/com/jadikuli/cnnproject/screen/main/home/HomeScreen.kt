@@ -34,13 +34,16 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jadikuli.cnnproject.screen.main.shared.components.card.ArticleCard
 
-//@Preview(showBackground = true)
-//@Composable
-//fun HomeScreenPreview() {
-//    MaterialTheme {
-//        HomeScreenContent()
-//    }
-//}
+@RequiresApi(Build.VERSION_CODES.O)
+@Preview(showBackground = true)
+@Composable
+fun HomeScreenPreview() {
+    MaterialTheme {
+        HomeScreenContent(
+            onArticleClick = {}
+        )
+    }
+}
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -55,7 +58,8 @@ fun HomeScreenContent(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(16.dp),
+            .padding(horizontal = 16.dp)
+            .padding(bottom = 76.dp),
         contentPadding = PaddingValues(bottom = 22.dp)
     ) {
         item {
@@ -82,6 +86,8 @@ fun HomeScreenContent(
                         color = Color.Black
                     )
 
+                    Spacer(Modifier.height(5.dp))
+
                     profile?.let {
                         Text(
                             it.name,
@@ -93,7 +99,7 @@ fun HomeScreenContent(
                         )
                     }
 
-                    Spacer(Modifier.height(10.dp))
+                    Spacer(Modifier.height(15.dp))
 
                     HorizontalDivider(
                         modifier = Modifier.fillMaxWidth(),
@@ -101,7 +107,7 @@ fun HomeScreenContent(
                         color = Color.Gray
                     )
 
-                    Spacer(Modifier.height(10.dp))
+                    Spacer(Modifier.height(15.dp))
 
                     Row(
                         Modifier.fillMaxWidth(),
@@ -109,14 +115,14 @@ fun HomeScreenContent(
                     ) {
                         Text(
                             "Pemeriksaan Terakhir",
-                            fontSize = 12.sp,
+                            fontSize = 14.sp,
                             fontWeight = FontWeight.Light,
                             color = Color.Black
                         )
 
                         Text(
                             "Sehat",
-                            fontSize = 16.sp,
+                            fontSize = 14.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.Green
                         )
