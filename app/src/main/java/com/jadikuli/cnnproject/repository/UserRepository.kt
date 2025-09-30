@@ -2,6 +2,10 @@ package com.jadikuli.cnnproject.repository
 
 import com.jadikuli.cnnproject.network.ApiService
 import com.jadikuli.cnnproject.network.model.ProfileData
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(
@@ -14,5 +18,11 @@ class UserRepository @Inject constructor(
         } catch (e: Exception) {
             null
         }
+    }
+
+    suspend fun uploadImage(file: File) {
+        val requestBody = file.asRequestBody("image/jpeg".toMediaType())
+        val part = MultipartBody.Part.createFormData("file", file.name, requestBody)
+        api.uploadImage(part)
     }
 }

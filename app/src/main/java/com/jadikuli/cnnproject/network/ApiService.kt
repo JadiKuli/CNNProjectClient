@@ -7,9 +7,13 @@ import com.jadikuli.cnnproject.network.model.LoginResponse
 import com.jadikuli.cnnproject.network.model.ProfileResponse
 import com.jadikuli.cnnproject.network.model.RegisterRequest
 import com.jadikuli.cnnproject.network.model.RegisterResponse
+import okhttp3.MultipartBody
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface ApiService {
@@ -31,4 +35,11 @@ interface ApiService {
     // Profile
     @GET("user")
     suspend fun profile(): ProfileResponse
+
+    // Upload Image
+    @Multipart
+    @POST("upload")
+    suspend fun uploadImage(
+        @Part file: MultipartBody.Part
+    ): Response<Unit>
 }

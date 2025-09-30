@@ -16,4 +16,6 @@ sealed class Screen(
     object DetailArticle : Screen("article_detail") {
         fun createRoute(articleId: Int) = "$route/$articleId"
     }
+
+    object Picture : Screen("picture", "Upload", R.drawable.camera)
 }

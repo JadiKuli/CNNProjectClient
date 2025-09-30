@@ -47,6 +47,7 @@ import com.jadikuli.cnnproject.navigation.Screen
 import com.jadikuli.cnnproject.screen.authentication.AuthViewModel
 import com.jadikuli.cnnproject.screen.main.history.historyNavGraph
 import com.jadikuli.cnnproject.screen.main.home.homeNavGraph
+import com.jadikuli.cnnproject.screen.main.picture.pictureNavGraph
 import com.jadikuli.cnnproject.screen.main.profile.profileNavGraph
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -54,8 +55,9 @@ import com.jadikuli.cnnproject.screen.main.profile.profileNavGraph
 fun MainScreen(navController: NavHostController = rememberNavController(), authViewModel: AuthViewModel = hiltViewModel()) {
     val items = listOf(
         Screen.Home,
+        Screen.Picture,
         Screen.History,
-        Screen.Profile
+        Screen.Profile,
     )
 
     Scaffold(
@@ -125,6 +127,7 @@ fun MainScreen(navController: NavHostController = rememberNavController(), authV
             homeNavGraph(navController)
             historyNavGraph(navController)
             profileNavGraph(navController, authViewModel)
+            pictureNavGraph(navController)
         }
     }
 }
