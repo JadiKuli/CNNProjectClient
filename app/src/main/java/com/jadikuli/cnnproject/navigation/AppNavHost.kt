@@ -1,6 +1,8 @@
 package com.jadikuli.cnnproject.navigation
 
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
@@ -14,17 +16,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.jadikuli.cnnproject.screen.MainScreen
 import com.jadikuli.cnnproject.screen.authentication.AuthViewModel
 import com.jadikuli.cnnproject.screen.authentication.authNavGraph
 import com.jadikuli.cnnproject.screen.main.history.historyNavGraph
 import com.jadikuli.cnnproject.screen.main.home.homeNavGraph
 import com.jadikuli.cnnproject.screen.main.profile.profileNavGraph
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AppNavHost(authViewModel: AuthViewModel = hiltViewModel()) {
     val navController = rememberNavController()
     val isLoggedIn by authViewModel.isLoggedIn.collectAsState()
-
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
@@ -33,19 +36,23 @@ fun AppNavHost(authViewModel: AuthViewModel = hiltViewModel()) {
         }
     }
 
-    if (isLoggedIn == null) {
-        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            CircularProgressIndicator()
+    when (isLoggedIn) {
+        null -> {
+            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator()
+            }
         }
-    } else {
-        NavHost(
-            navController = navController,
-            startDestination = if (isLoggedIn == true) "home" else "login"
-        ) {
-            authNavGraph(navController, authViewModel)
-            homeNavGraph(navController)
-            historyNavGraph(navController)
-            profileNavGraph(navController)
+        true -> {
+            MainScreen(navController)
+        }
+        false -> {
+            NavHost(
+                navController = navController,
+                startDestination = Screen.Login.route
+            ) {
+                authNavGraph(navController, authViewModel)
+            }
         }
     }
 }
+
