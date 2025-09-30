@@ -8,3 +8,12 @@ data class ArticleData(
     @SerializedName("created_at") val createdAt: String,
 )
 typealias ArticleResponse = BaseResponse<List<ArticleData>>
+
+data class ArticleDetailData(
+    val id: Number,
+    val title: String,
+    @SerializedName("created_at") val createdAt: String,
+    val content: String
+)
+typealias ArticleDetailResponse = BaseResponse<ArticleDetailData>
+

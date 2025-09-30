@@ -149,6 +149,8 @@ fun HomeScreenContent(
                 article = article,
                 onClick = { onArticleClick(article.id) }
             )
+
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }

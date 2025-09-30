@@ -13,4 +13,7 @@ sealed class Screen(
     object Profile : Screen("profile", "Profile", R.drawable.account)
     object Register : Screen("register")
     object Login : Screen("login")
+    object DetailArticle : Screen("article_detail") {
+        fun createRoute(articleId: Int) = "$route/$articleId"
+    }
 }

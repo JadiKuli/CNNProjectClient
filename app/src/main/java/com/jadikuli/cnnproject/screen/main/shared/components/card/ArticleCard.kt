@@ -43,7 +43,7 @@ fun ArticleCard(
         Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
-            .height(175.dp)
+            .height(160.dp)
             .clickable { onClick() }
     ) {
         AsyncImage(
@@ -58,7 +58,7 @@ fun ArticleCard(
 
         Column(
             Modifier
-                .height(75.dp)
+                .height(60.dp)
                 .fillMaxWidth()
                 .padding(10.dp),
             verticalArrangement = Arrangement.SpaceBetween
