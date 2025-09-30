@@ -37,19 +37,21 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.jadikuli.cnnproject.navigation.Screen
+import com.jadikuli.cnnproject.screen.authentication.AuthViewModel
 import com.jadikuli.cnnproject.screen.main.history.historyNavGraph
 import com.jadikuli.cnnproject.screen.main.home.homeNavGraph
 import com.jadikuli.cnnproject.screen.main.profile.profileNavGraph
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun MainScreen(navController: NavHostController = rememberNavController()) {
+fun MainScreen(navController: NavHostController = rememberNavController(), authViewModel: AuthViewModel = hiltViewModel()) {
     val items = listOf(
         Screen.Home,
         Screen.History,
@@ -122,7 +124,7 @@ fun MainScreen(navController: NavHostController = rememberNavController()) {
         ) {
             homeNavGraph(navController)
             historyNavGraph(navController)
-            profileNavGraph(navController)
+            profileNavGraph(navController, authViewModel)
         }
     }
 }

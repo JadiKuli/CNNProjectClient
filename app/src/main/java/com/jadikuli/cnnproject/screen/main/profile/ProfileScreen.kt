@@ -1,6 +1,7 @@
 package com.jadikuli.cnnproject.screen.main.profile
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,17 +17,29 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
+import com.jadikuli.cnnproject.screen.authentication.AuthViewModel
 
 @Composable
-fun ProfileScreenContent() {
+fun ProfileScreenContent(
+    viewModel: ProfileViewModel = hiltViewModel(),
+    authViewModel: AuthViewModel = hiltViewModel(),
+    onLogout: () -> Unit
+) {
+    val profile by viewModel.profile.collectAsState()
+
     Column(
         Modifier
             .fillMaxSize()
@@ -52,33 +65,42 @@ fun ProfileScreenContent() {
                 verticalArrangement = Arrangement.spacedBy(5.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Box(
-                    Modifier
-                        .width(75.dp)
-                        .height(75.dp)
-                        .clip(RoundedCornerShape(50.dp))
-                        .background(Color.Gray)
-                )
+                profile?.let {
+                    AsyncImage(
+                        model = it.profilePhoto ?: "https://pcyjkuasuhnisovirnhn.supabase.co/storage/v1/object/public/universal/vector-flat-illustration-gray-color-avatar-user-profile-person-icon-profile-picture-suitable-social-media-profiles-icons-screensavers-as-templatex9xa_719432-1056.jpg",
+                        contentDescription = "Profile Photo",
+                        modifier = Modifier
+                            .width(100.dp)
+                            .height(100.dp)
+                            .clip(RoundedCornerShape(20.dp))
+                    )
 
-                Spacer(Modifier.height(5.dp))
+                    Spacer(Modifier.height(5.dp))
 
-                Text(
-                    "Arjuna Satria Dewa Bagaskara",
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 18.sp
-                )
+                    Text(
+                        it.name,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 18.sp,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
 
-                Text(
-                    "dewa@gmail.com",
-                    fontWeight = FontWeight.Light,
-                    fontSize = 15.sp
-                )
+                    Text(
+                        it.email,
+                        fontWeight = FontWeight.Light,
+                        fontSize = 15.sp,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
 
-                Text(
-                    "087866356647",
-                    fontWeight = FontWeight.Light,
-                    fontSize = 15.sp
-                )
+                    Text(
+                        it.phoneNumber ?: "null",
+                        fontWeight = FontWeight.Light,
+                        fontSize = 15.sp,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
             }
         }
 
@@ -175,7 +197,10 @@ fun ProfileScreenContent() {
             Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(100))
-                .background(Color.Red),
+                .background(Color.Red)
+                .clickable {
+                    authViewModel.logout()
+                },
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(

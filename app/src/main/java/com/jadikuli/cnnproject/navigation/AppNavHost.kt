@@ -19,9 +19,6 @@ import androidx.navigation.compose.rememberNavController
 import com.jadikuli.cnnproject.screen.MainScreen
 import com.jadikuli.cnnproject.screen.authentication.AuthViewModel
 import com.jadikuli.cnnproject.screen.authentication.authNavGraph
-import com.jadikuli.cnnproject.screen.main.history.historyNavGraph
-import com.jadikuli.cnnproject.screen.main.home.homeNavGraph
-import com.jadikuli.cnnproject.screen.main.profile.profileNavGraph
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
