@@ -53,6 +53,7 @@ fun HomeScreenContent(
 ) {
     val articles by viewModel.articles.collectAsState()
     val profile by viewModel.profile.collectAsState()
+    val history by viewModel.history.collectAsState()
 
     LazyColumn(
         modifier = Modifier
@@ -120,11 +121,26 @@ fun HomeScreenContent(
                             color = Color.Black
                         )
 
-                        Text(
-                            "Sehat",
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.Green
+                        history?.let {
+                            val indicationColor = when (it.indication) {
+                                "Diabetes" -> Color(0xFFB22222)
+                                "Normal" -> Color(0xFF347433)
+                                "CF" -> Color(0xFFFF6F3C)
+                                "CFRD" -> Color(0xFFFFC107)
+                                else -> Color.Black
+                            }
+
+                            Text(
+                                text = it.indication,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = indicationColor
+                            )
+                        } ?: Text(
+                            text = "Empty Data",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color.Gray
                         )
                     }
                 }

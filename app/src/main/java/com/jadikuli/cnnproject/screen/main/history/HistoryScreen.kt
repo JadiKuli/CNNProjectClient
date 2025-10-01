@@ -1,5 +1,7 @@
 package com.jadikuli.cnnproject.screen.main.history
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,27 +10,35 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.jadikuli.cnnproject.screen.main.shared.components.card.HistoryCard
 
-@Preview(showBackground = true)
-@Composable
-fun HistoryScreenPreview() {
-    MaterialTheme {
-        HistoryScreenContent()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun HistoryScreenPreview() {
+//    MaterialTheme {
+//        HistoryScreenContent()
+//    }
+//}
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun HistoryScreenContent() {
+fun HistoryScreenContent(
+    viewModel: HistoryViewModel = hiltViewModel()
+) {
+    val history by viewModel.history.collectAsState()
+    val latestHistory by viewModel.latestHistory.collectAsState()
+
     Column(
         Modifier
             .fillMaxSize()
@@ -44,7 +54,14 @@ fun HistoryScreenContent() {
 
         Spacer(Modifier.height(10.dp))
 
-        HistoryCard()
+        latestHistory?.let {
+            HistoryCard(it)
+        } ?: Text(
+            text = "Empty Data",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Medium,
+            color = Color.Gray
+        )
 
         Spacer(Modifier.height(20.dp))
 
@@ -55,14 +72,24 @@ fun HistoryScreenContent() {
             color = Color.Black
         )
 
-        LazyColumn(
-            Modifier
-                .fillMaxSize()
-                .padding(top = 10.dp),
-            verticalArrangement = Arrangement.spacedBy(5.dp)
-        ) {
-            items(10) {
-                HistoryCard()
+        if (history.filterNotNull().isEmpty()) {
+            Text(
+                text = "Empty Data",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color.Gray,
+                modifier = Modifier.padding(top = 10.dp)
+            )
+        } else {
+            LazyColumn(
+                Modifier
+                    .fillMaxSize()
+                    .padding(top = 10.dp),
+                verticalArrangement = Arrangement.spacedBy(5.dp)
+            ) {
+                items(history.filterNotNull()) { historyData ->
+                    HistoryCard(historyData)
+                }
             }
         }
     }

@@ -2,6 +2,8 @@ package com.jadikuli.cnnproject.network
 
 import com.jadikuli.cnnproject.network.model.ArticleDetailResponse
 import com.jadikuli.cnnproject.network.model.ArticleResponse
+import com.jadikuli.cnnproject.network.model.HistoryLatestResponse
+import com.jadikuli.cnnproject.network.model.HistoryResponse
 import com.jadikuli.cnnproject.network.model.LoginRequest
 import com.jadikuli.cnnproject.network.model.LoginResponse
 import com.jadikuli.cnnproject.network.model.ProfileResponse
@@ -31,7 +33,6 @@ interface ApiService {
     @GET("articles/{id}")
     suspend fun getArticleDetail(@Path("id") id: Int): ArticleDetailResponse
 
-
     // Profile
     @GET("user")
     suspend fun profile(): ProfileResponse
@@ -42,4 +43,11 @@ interface ApiService {
     suspend fun uploadImage(
         @Part file: MultipartBody.Part
     ): Response<Unit>
+
+    // History
+    @GET("history")
+    suspend fun getHistory(): HistoryResponse
+
+    @GET("history/latest")
+    suspend fun getLatestHistory(): HistoryLatestResponse
 }
