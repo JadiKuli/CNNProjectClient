@@ -9,3 +9,9 @@ data class ProfileData(
     @SerializedName("profile_photo_path") val profilePhoto: String?
 )
 typealias ProfileResponse = BaseResponse<ProfileData>
+
+data class ProfileRequest(
+    @SerializedName("name") val fullname: String,
+    val email: String,
+    @SerializedName("phone_number") val phoneNumber: String,
+)

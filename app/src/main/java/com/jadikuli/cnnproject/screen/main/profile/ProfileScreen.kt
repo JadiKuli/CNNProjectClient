@@ -1,5 +1,6 @@
 package com.jadikuli.cnnproject.screen.main.profile
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +18,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -36,9 +38,14 @@ import com.jadikuli.cnnproject.screen.authentication.AuthViewModel
 fun ProfileScreenContent(
     viewModel: ProfileViewModel = hiltViewModel(),
     authViewModel: AuthViewModel = hiltViewModel(),
+    onNavigateToEditProfile: () -> Unit,
     onLogout: () -> Unit
 ) {
     val profile by viewModel.profile.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.fetchProfile()
+    }
 
     Column(
         Modifier
@@ -67,7 +74,8 @@ fun ProfileScreenContent(
             ) {
                 profile?.let {
                     AsyncImage(
-                        model = it.profilePhoto ?: "https://pcyjkuasuhnisovirnhn.supabase.co/storage/v1/object/public/universal/vector-flat-illustration-gray-color-avatar-user-profile-person-icon-profile-picture-suitable-social-media-profiles-icons-screensavers-as-templatex9xa_719432-1056.jpg",
+                        model = if (!it.profilePhoto.isNullOrEmpty()) "https://cnnproject.kuncipintu.my.id/storage/" + it.profilePhoto
+                        else "https://pcyjkuasuhnisovirnhn.supabase.co/storage/v1/object/public/universal/vector-flat-illustration-gray-color-avatar-user-profile-person-icon-profile-picture-suitable-social-media-profiles-icons-screensavers-as-templatex9xa_719432-1056.jpg",
                         contentDescription = "Profile Photo",
                         modifier = Modifier
                             .width(100.dp)
@@ -116,7 +124,10 @@ fun ProfileScreenContent(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 10.dp),
+                .padding(top = 10.dp)
+                .clickable {
+                    onNavigateToEditProfile()
+                },
             shape = RoundedCornerShape(8.dp),
             colors = CardDefaults.cardColors(
                 containerColor = Color.White,

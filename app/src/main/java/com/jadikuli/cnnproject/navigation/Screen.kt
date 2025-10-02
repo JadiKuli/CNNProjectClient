@@ -21,4 +21,5 @@ sealed class Screen(
     object Failed : Screen("failed")
 
     object Picture : Screen("picture", "Upload", R.drawable.camera)
+    object UpdateProfile : Screen("update_profile")
 }

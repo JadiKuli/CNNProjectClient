@@ -48,11 +48,16 @@ import com.jadikuli.cnnproject.screen.authentication.AuthViewModel
 import com.jadikuli.cnnproject.screen.main.history.historyNavGraph
 import com.jadikuli.cnnproject.screen.main.home.homeNavGraph
 import com.jadikuli.cnnproject.screen.main.picture.pictureNavGraph
+import com.jadikuli.cnnproject.screen.main.profile.ProfileViewModel
 import com.jadikuli.cnnproject.screen.main.profile.profileNavGraph
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun MainScreen(navController: NavHostController = rememberNavController(), authViewModel: AuthViewModel = hiltViewModel()) {
+fun MainScreen(
+    navController: NavHostController = rememberNavController(),
+    authViewModel: AuthViewModel = hiltViewModel(),
+    profileViewModel: ProfileViewModel = hiltViewModel()
+) {
     val items = listOf(
         Screen.Home,
         Screen.Picture,
@@ -79,7 +84,8 @@ fun MainScreen(navController: NavHostController = rememberNavController(), authV
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     items.forEach { screen ->
-                        val currentDestination = navController.currentBackStackEntryAsState().value?.destination
+                        val currentDestination =
+                            navController.currentBackStackEntryAsState().value?.destination
                         val selected = currentDestination?.route == screen.route
 
                         Column(
@@ -127,7 +133,7 @@ fun MainScreen(navController: NavHostController = rememberNavController(), authV
         ) {
             homeNavGraph(navController)
             historyNavGraph(navController)
-            profileNavGraph(navController, authViewModel)
+            profileNavGraph(navController, authViewModel, profileViewModel)
             pictureNavGraph(navController)
         }
     }

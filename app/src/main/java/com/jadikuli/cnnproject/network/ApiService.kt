@@ -6,6 +6,7 @@ import com.jadikuli.cnnproject.network.model.HistoryLatestResponse
 import com.jadikuli.cnnproject.network.model.HistoryResponse
 import com.jadikuli.cnnproject.network.model.LoginRequest
 import com.jadikuli.cnnproject.network.model.LoginResponse
+import com.jadikuli.cnnproject.network.model.ProfileRequest
 import com.jadikuli.cnnproject.network.model.ProfileResponse
 import com.jadikuli.cnnproject.network.model.RegisterRequest
 import com.jadikuli.cnnproject.network.model.RegisterResponse
@@ -15,6 +16,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
 
@@ -37,11 +39,20 @@ interface ApiService {
     @GET("user")
     suspend fun profile(): ProfileResponse
 
+    @PUT("user")
+    suspend fun updateProfileData(@Body request: ProfileRequest): Response<Unit>
+
     // Upload Image
     @Multipart
     @POST("history")
     suspend fun uploadImage(
         @Part image: MultipartBody.Part
+    ): Response<Unit>
+
+    @Multipart
+    @POST("user/profile-picture")
+    suspend fun updateProfile(
+        @Part profile_picture: MultipartBody.Part
     ): Response<Unit>
 
     // History
