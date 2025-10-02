@@ -27,16 +27,20 @@ class PictureViewModel @Inject constructor(
                 _uiState.value = UploadUiState.Loading
 
                 val inputStream = context.contentResolver.openInputStream(uri) ?: return@launch
-                val file = File(context.cacheDir, "upload_${System.currentTimeMillis()}.jpg")
-                file.outputStream().use { inputStream.copyTo(it) }
+                val image = File(context.cacheDir, "upload_${System.currentTimeMillis()}.jpg")
+                image.outputStream().use { inputStream.copyTo(it) }
 
-                repository.uploadImage(file)
+                repository.uploadImage(image)
 
                 _uiState.value = UploadUiState.Success
             } catch (e: Exception) {
                 _uiState.value = UploadUiState.Error(e.message ?: "Upload failed")
             }
         }
+    }
+
+    fun resetState() {
+        _uiState.value = UploadUiState.Idle
     }
 }
 

@@ -8,6 +8,21 @@ import com.jadikuli.cnnproject.navigation.Screen
 
 fun NavGraphBuilder.pictureNavGraph(navController: NavController) {
     composable(Screen.Picture.route) {
-        PictureScreen()
+        PictureScreen(
+            onSuccess = {
+                navController.navigate(Screen.Success.route) {
+                    popUpTo(Screen.Home.route) {
+                        inclusive = true
+                    }
+                }
+            },
+            onFailed = {
+                navController.navigate(Screen.Failed.route) {
+                    popUpTo(Screen.Home.route) {
+                        inclusive = true
+                    }
+                }
+            }
+        )
     }
 }

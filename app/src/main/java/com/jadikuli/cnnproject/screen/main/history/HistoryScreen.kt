@@ -90,6 +90,10 @@ fun HistoryScreenContent(
                 items(history.filterNotNull()) { historyData ->
                     HistoryCard(historyData)
                 }
+
+                item {
+                    Spacer(Modifier.height(85.dp))
+                }
             }
         }
     }

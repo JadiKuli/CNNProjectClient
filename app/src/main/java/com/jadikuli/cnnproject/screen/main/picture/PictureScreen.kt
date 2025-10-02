@@ -21,10 +21,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -48,7 +50,9 @@ import java.io.File
 
 @Composable
 fun PictureScreen(
-    viewModel: PictureViewModel = hiltViewModel()
+    viewModel: PictureViewModel = hiltViewModel(),
+    onSuccess: () -> Unit,
+    onFailed: () -> Unit
 ) {
     val context = LocalContext.current
     val uiState by viewModel.uiState.collectAsState()
@@ -72,18 +76,16 @@ fun PictureScreen(
                 )
             }
             is UploadUiState.Success -> {
-                Text(
-                    "Upload Success!",
-                    modifier = Modifier.align(Alignment.TopCenter),
-                    color = Color.Green
-                )
+                LaunchedEffect(Unit) {
+                    onSuccess()
+                    viewModel.resetState()
+                }
             }
             is UploadUiState.Error -> {
-                Text(
-                    "Error: ${(uiState as UploadUiState.Error).message}",
-                    modifier = Modifier.align(Alignment.TopCenter),
-                    color = Color.Red
-                )
+                LaunchedEffect(Unit) {
+                    onFailed()
+                    viewModel.resetState()
+                }
             }
             else -> {}
         }

@@ -39,13 +39,13 @@ interface ApiService {
 
     // Upload Image
     @Multipart
-    @POST("upload")
+    @POST("history")
     suspend fun uploadImage(
-        @Part file: MultipartBody.Part
+        @Part image: MultipartBody.Part
     ): Response<Unit>
 
     // History
-    @GET("history")
+    @GET("history?sort=latest")
     suspend fun getHistory(): HistoryResponse
 
     @GET("history/latest")

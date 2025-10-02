@@ -22,7 +22,7 @@ class UserRepository @Inject constructor(
 
     suspend fun uploadImage(file: File) {
         val requestBody = file.asRequestBody("image/jpeg".toMediaType())
-        val part = MultipartBody.Part.createFormData("file", file.name, requestBody)
+        val part = MultipartBody.Part.createFormData("image", file.name, requestBody)
         api.uploadImage(part)
     }
 }

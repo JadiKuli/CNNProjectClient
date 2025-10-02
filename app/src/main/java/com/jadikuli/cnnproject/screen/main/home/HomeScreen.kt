@@ -59,8 +59,7 @@ fun HomeScreenContent(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(horizontal = 16.dp)
-            .padding(bottom = 76.dp),
+            .padding(horizontal = 16.dp),
         contentPadding = PaddingValues(bottom = 22.dp)
     ) {
         item {
@@ -167,6 +166,10 @@ fun HomeScreenContent(
             )
 
             Spacer(modifier = Modifier.height(16.dp))
+        }
+
+        item {
+            Spacer(Modifier.height(76.dp))
         }
     }
 }

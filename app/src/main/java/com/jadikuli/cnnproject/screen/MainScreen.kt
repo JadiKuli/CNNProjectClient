@@ -67,10 +67,11 @@ fun MainScreen(navController: NavHostController = rememberNavController(), authV
             Box(
                 modifier = Modifier
                     .padding(horizontal = 40.dp, vertical = 16.dp)
+                    .padding(bottom = 10.dp)
                     .clip(RoundedCornerShape(50))
                     .shadow(10.dp, RoundedCornerShape(50))
                     .background(Color.White)
-                    .padding(vertical = 12.dp, horizontal = 24.dp)
+                    .padding(vertical = 8.dp, horizontal = 24.dp)
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
