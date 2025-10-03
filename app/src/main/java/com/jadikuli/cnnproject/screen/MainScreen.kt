@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -43,6 +44,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.jadikuli.cnnproject.R
 import com.jadikuli.cnnproject.navigation.Screen
 import com.jadikuli.cnnproject.screen.authentication.AuthViewModel
 import com.jadikuli.cnnproject.screen.main.history.historyNavGraph
@@ -107,7 +109,7 @@ fun MainScreen(
                                     painter = painterResource(id = resId),
                                     contentDescription = null,
                                     modifier = Modifier.size(28.dp),
-                                    tint = if (selected) Color(0xFFFDB45C) else Color.Black
+                                    tint = if (selected) colorResource(R.color.main_color) else Color.Black
                                 )
                             }
 
@@ -115,7 +117,7 @@ fun MainScreen(
 
                             Text(
                                 text = screen.title ?: "",
-                                color = if (selected) Color(0xFFFDB45C) else Color.Black,
+                                color = if (selected) colorResource(R.color.main_color) else Color.Black,
                                 fontSize = 12.sp,
                                 fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal
                             )

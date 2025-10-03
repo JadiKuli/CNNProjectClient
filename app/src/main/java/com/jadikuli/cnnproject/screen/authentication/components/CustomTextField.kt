@@ -10,9 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import com.jadikuli.cnnproject.R
 import com.jadikuli.cnnproject.screen.authentication.OrangeColor
 import com.jadikuli.cnnproject.screen.authentication.TextGrayColor
 
@@ -38,7 +40,7 @@ fun CustomTextField(
         visualTransformation = if (isPassword) PasswordVisualTransformation() else androidx.compose.ui.text.input.VisualTransformation.None,
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = OrangeColor,
+            focusedBorderColor = colorResource(R.color.main_color),
             unfocusedBorderColor = Color.LightGray,
             focusedContainerColor = Color.White,
             unfocusedContainerColor = Color.White

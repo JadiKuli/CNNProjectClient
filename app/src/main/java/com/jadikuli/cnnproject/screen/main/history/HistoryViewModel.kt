@@ -21,12 +21,7 @@ class HistoryViewModel @Inject constructor(
     private val _latestHistory = MutableStateFlow<HistoryData?>(null)
     val latestHistory: StateFlow<HistoryData?> = _latestHistory
 
-    init {
-        fetchHistory()
-        fetchLatestHistory()
-    }
-
-    private fun fetchHistory() {
+    fun fetchHistory() {
         viewModelScope.launch {
             val response = historyRepository.getHistory()
             if (response != null) {
@@ -35,7 +30,7 @@ class HistoryViewModel @Inject constructor(
         }
     }
 
-    private fun fetchLatestHistory() {
+    fun fetchLatestHistory() {
         viewModelScope.launch {
             val response = historyRepository.getLatestHistory()
             if (response != null) {

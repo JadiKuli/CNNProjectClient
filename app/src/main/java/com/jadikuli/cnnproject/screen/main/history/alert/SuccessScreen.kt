@@ -14,11 +14,13 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -36,13 +38,16 @@ fun SuccessScreen(
     viewModel: HistoryViewModel = hiltViewModel(),
     onClick: () -> Unit
 ) {
-    val latestHistory by viewModel.latestHistory.collectAsState()
+    LaunchedEffect(Unit) {
+        viewModel.fetchLatestHistory()
+    }
 
+    val latestHistory by viewModel.latestHistory.collectAsState()
     val indicationColor = when (latestHistory?.indication) {
         "Diabetes" -> Color(0xFFB22222)
         "Normal" -> Color(0xFF347433)
         "CF" -> Color(0xFFFF6F3C)
-        "CFRD" -> Color(0xFFFFC107)
+        "CFRD" -> colorResource(R.color.main_color)
         else -> Color.Black
     }
 
@@ -77,6 +82,14 @@ fun SuccessScreen(
             textAlign = TextAlign.Center
         )
         latestHistory?.let {
+            val indicationText = when (latestHistory?.indication) {
+                "Diabetes" -> Text(" (1 mM glukosa dan 20 mmol/L Cl-)")
+                "Normal" -> Text(" (0.05 mM glukosa dan 15 mmol/L Cl-)")
+                "CF" -> Text(" (0.05 mM glukosa dan 15 mmol/L Cl-)")
+                "CFRD" -> Text(" (0.05 mM glukosa dan 75 mmol/L Cl-)")
+                else -> Text("")
+            }
+
             Text(
                 it.indication,
                 modifier = Modifier

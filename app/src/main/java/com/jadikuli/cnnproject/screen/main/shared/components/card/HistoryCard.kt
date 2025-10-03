@@ -17,9 +17,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jadikuli.cnnproject.R
 import com.jadikuli.cnnproject.helper.formatDate
 import com.jadikuli.cnnproject.network.model.HistoryData
 
@@ -32,7 +34,7 @@ fun HistoryCard(
         "Diabetes" -> Color(0xFFB22222)
         "Normal" -> Color(0xFF347433)
         "CF" -> Color(0xFFFF6F3C)
-        "CFRD" -> Color(0xFFFFC107)
+        "CFRD" -> colorResource(R.color.main_color)
         else -> Color.Black
     }
 

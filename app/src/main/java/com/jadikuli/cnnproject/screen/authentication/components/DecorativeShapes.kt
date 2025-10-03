@@ -8,7 +8,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
+import com.jadikuli.cnnproject.R
 import com.jadikuli.cnnproject.screen.authentication.LightOrangeColor
 import com.jadikuli.cnnproject.screen.authentication.OrangeColor
 
@@ -20,7 +22,7 @@ fun DecorativeShapes() {
             .offset(x = 200.dp, y = (-50).dp)
             .size(200.dp)
             .clip(RoundedCornerShape(50.dp))
-            .background(LightOrangeColor.copy(alpha = 0.3f))
+            .background(colorResource(R.color.main_color).copy(alpha = 0.3f))
     )
 
     // Bottom left shape
@@ -29,6 +31,6 @@ fun DecorativeShapes() {
             .offset(x = (-50).dp, y = 600.dp)
             .size(250.dp)
             .clip(RoundedCornerShape(50.dp))
-            .background(OrangeColor.copy(alpha = 0.5f))
+            .background(colorResource(R.color.main_color).copy(alpha = 0.5f))
     )
 }

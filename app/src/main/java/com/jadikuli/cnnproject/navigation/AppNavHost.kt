@@ -17,6 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.jadikuli.cnnproject.screen.MainScreen
+import com.jadikuli.cnnproject.screen.SplashScreen
 import com.jadikuli.cnnproject.screen.authentication.AuthViewModel
 import com.jadikuli.cnnproject.screen.authentication.authNavGraph
 
@@ -35,9 +36,7 @@ fun AppNavHost(authViewModel: AuthViewModel = hiltViewModel()) {
 
     when (isLoggedIn) {
         null -> {
-            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
-            }
+            SplashScreen()
         }
         true -> {
             MainScreen(navController)

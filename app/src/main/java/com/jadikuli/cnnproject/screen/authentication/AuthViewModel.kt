@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.jadikuli.cnnproject.data.store.UserDataStore
 import com.jadikuli.cnnproject.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -26,6 +27,8 @@ class AuthViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
+            delay(2000)
+
             dataStore.getToken().collect { token ->
                 _isLoggedIn.value = !token.isNullOrEmpty()
             }

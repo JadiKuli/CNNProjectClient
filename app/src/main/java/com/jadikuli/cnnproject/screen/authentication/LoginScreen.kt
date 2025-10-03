@@ -42,10 +42,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jadikuli.cnnproject.R
 import com.jadikuli.cnnproject.screen.authentication.components.CustomTextField
 import com.jadikuli.cnnproject.screen.authentication.components.DecorativeShapes
 
@@ -157,7 +159,7 @@ fun LoginScreen(
                             .fillMaxWidth()
                             .height(56.dp),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = OrangeColor
+                            containerColor = colorResource(R.color.main_color)
                         ),
                         shape = RoundedCornerShape(28.dp)
                     ) {
@@ -192,7 +194,7 @@ fun LoginScreen(
                 Text(
                     text = "Sign up",
                     fontSize = 14.sp,
-                    color = OrangeColor,
+                    color = colorResource(R.color.main_color),
                     fontWeight = FontWeight.Medium,
                     modifier = Modifier.clickable { onNavigateToRegister() }
                 )
